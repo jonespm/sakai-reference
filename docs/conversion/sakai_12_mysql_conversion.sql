@@ -228,7 +228,24 @@ DROP TABLE SAKAI_POSTEM_STUDENT_DUPES;
 
 ALTER TABLE SAKAI_POSTEM_STUDENT MODIFY COLUMN username varchar(99), DROP INDEX POSTEM_STUDENT_USERNAME_I,
   ADD UNIQUE INDEX POSTEM_USERNAME_SURROGATE (username, surrogate_key);
+
+<<<<<<< found
 -- END SAK-15708
+||||||| expected
+-- END SAK-15708+-- END SAK-15708
+=======
+-- BEING SAK-32046 -- Change text 'My Workspace' which still appears in My Home > Resources
+UPDATE CONTENT_COLLECTION
+SET BINARY_ENTITY = REPLACE(BINARY_ENTITY, 'Workspace', 'Home     ')
+where IN_COLLECTION = '/user/';
+
+-- TXkgV29ya3NwYWNl is BASE64 for 'My Workspace'
+-- TXkgSG9tZQ== is BASE64 for 'My Home'
+UPDATE CONTENT_COLLECTION
+SET XML = REPLACE(XML, 'TXkgV29ya3NwYWNl', 'TXkgSG9tZQ==')
+where IN_COLLECTION = '/user/';
+-- END SAK-32046
+>>>>>>> replacement
 
 -- BEGIN SAK-32083 TAGS
 
